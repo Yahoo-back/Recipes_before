@@ -1,19 +1,16 @@
-@import "~themes/vars";
-
+@import '~themes/vars';
 .form {
   position: absolute;
   top: 50%;
   left: 50%;
   margin: -160px 0 0 -160px;
-  width: 320px;
-  height: 320px;
+  width: 350px;
+  height: 370px;
   padding: 36px;
-  box-shadow: 0 0 100px rgba(0,0,0,.08);
-
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
   button {
     width: 100%;
   }
-
   p {
     color: rgb(204, 204, 204);
     text-align: center;
@@ -31,12 +28,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   img {
     width: 40px;
     margin-right: 8px;
   }
-
   span {
     vertical-align: text-bottom;
     font-size: 16px;
@@ -44,6 +39,12 @@
     display: inline-block;
     font-weight: 700;
     color: @primary-color;
+  }
+}
+
+:global {
+  .ant-form-item {
+    margin-bottom: 10px !important;
   }
 }
 

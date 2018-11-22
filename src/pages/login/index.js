@@ -1,65 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'dva';
-import { Button, Row, Form, Input } from 'antd';
-import { config } from 'utils';
+import React, { Component } from 'react';
+import LoginForm from './login';
+import RegisterForm from './register';
+import ResetForm from './reset';
+import { Tabs, Button, Input, Select } from 'antd';
 import styles from './index.less';
 
-const FormItem = Form.Item;
-
-const Login = ({ loading, dispatch, form: { getFieldDecorator, validateFieldsAndScroll } }) => {
-  function handleOk() {
-    validateFieldsAndScroll((errors, values) => {
-      if (errors) {
-        return;
-      }
-      dispatch({ type: 'login/login', payload: values });
-    });
+const { TabPane } = Tabs;
+class Login extends Component {
+  constructor() {
+    super();
+    this.state = {
+      nowform: 'login'
+    };
   }
 
-  return (
-    <div className={styles.form}>
-      <div className={styles.logo}>
-        <img alt="logo" src={config.logo} />
-        <span>{config.name}</span>
+  setNowform = nowform => {
+    this.setState({
+      nowform
+    });
+  };
+
+  render() {
+    return (
+      <div className={styles.form}>
+        <div className={styles.logo}>
+          <span>博世洗悦管理后台</span>
+        </div>
+        <div>
+          <Tabs>
+            <TabPane tab="登录" key="1">
+              {this.state.nowform === 'login' ? (
+                <LoginForm setNowform={this.setNowform} />
+              ) : (
+                <ResetForm setNowform={this.setNowform} />
+              )}
+            </TabPane>
+            <TabPane tab="注册" key="2">
+              <RegisterForm />
+            </TabPane>
+          </Tabs>
+        </div>
       </div>
-      <form>
-        <FormItem hasFeedback>
-          {getFieldDecorator('username', {
-            rules: [
-              {
-                required: true
-              }
-            ]
-          })(<Input onPressEnter={handleOk} placeholder="Username" />)}
-        </FormItem>
-        <FormItem hasFeedback>
-          {getFieldDecorator('password', {
-            rules: [
-              {
-                required: true
-              }
-            ]
-          })(<Input type="password" onPressEnter={handleOk} placeholder="Password" />)}
-        </FormItem>
-        <Row>
-          <Button type="primary" onClick={handleOk} loading={loading.effects.login}>
-            登录
-          </Button>
-          <p>
-            <span>Username：guest</span>
-            <span>Password：guest</span>
-          </p>
-        </Row>
-      </form>
-    </div>
-  );
-};
+    );
+  }
+}
 
-Login.propTypes = {
-  form: PropTypes.object,
-  dispatch: PropTypes.func,
-  loading: PropTypes.object
-};
-
-export default connect(({ loading }) => ({ loading }))(Form.create()(Login));
+export default Login;
