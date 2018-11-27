@@ -1,28 +1,36 @@
-import { request, config } from 'utils'
+import { request, config } from 'utils';
 
-const { api } = config
-const { user, userLogout, userLogin } = api
+const { api } = config;
+const { user, userLogout, userLogin, userList } = api;
 
-export function login (params) {
+export function login(params) {
   return request({
     url: userLogin,
     method: 'post',
-    data: params,
-  })
+    data: params
+  });
 }
 
-export function logout (params) {
+export function logout(params) {
   return request({
     url: userLogout,
     method: 'get',
-    data: params,
-  })
+    data: params
+  });
 }
 
-export function query (params) {
+export function query(params) {
   return request({
-    url: user.replace('/:id', ''),
+    url: userList.replace('/:id', ''),
     method: 'get',
-    data: params,
-  })
+    data: params
+  });
+}
+
+export function userLists(params) {
+  return request({
+    url: userList,
+    method: 'get',
+    data: params
+  });
 }

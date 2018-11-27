@@ -11,34 +11,19 @@ const styles = {
 };
 
 class LoginForm extends React.Component {
-  componentWillMount() {
-    const { dispatch } = this.props;
-    if (
-      (window.location.href.indexOf('?') >= 0 && window.location.href.split('?')[1] == 'isLogout') == false &&
-      window.localStorage.getItem('checked') == 'true'
-    ) {
-      dispatch({
-        type: 'login/login',
-        payload: {
-          email: window.localStorage.getItem('email'),
-          password: window.localStorage.getItem('password')
-        }
-      });
-    } else {
-      return;
-    }
+  constructor(props) {
+    super(props);
   }
 
-  handleOk = () => {
-    const {
-      dispatch,
-      form: { validateFieldsAndScroll }
-    } = this.props;
-    validateFieldsAndScroll((errors, values) => {
-      if (errors) {
-        return;
+  //登录
+  handleOk = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        this.props.dispatch({ type: 'login/login', payload: values });
       }
-      dispatch({ type: 'login/login', payload: values });
+      console.log(values.email);
+      console.log(localStorage);
     });
   };
 

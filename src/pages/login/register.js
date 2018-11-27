@@ -19,8 +19,9 @@ class LoginForm extends React.Component {
       window.localStorage.getItem('checked') == 'true'
     ) {
       dispatch({
-        type: 'login/login',
+        type: 'login/register',
         payload: {
+          email: window.localStorage.getItem('email'),
           username: window.localStorage.getItem('username'),
           password: window.localStorage.getItem('password')
         }
@@ -39,7 +40,7 @@ class LoginForm extends React.Component {
       if (errors) {
         return;
       }
-      dispatch({ type: 'login/login', payload: values });
+      dispatch({ type: 'login/register', payload: values });
     });
   };
 

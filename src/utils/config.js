@@ -14,10 +14,13 @@ module.exports = {
   APIV1,
   APIV2,
   api: {
+    //用户注册登录
+    userRegister: `${APIV1}/user/register`,
     userLogin: `${APIV1}/user/login`,
+    userList: `${APIV1}/user/userList`,
     userLogout: `${APIV1}/user/logout`,
     userInfo: `${APIV1}/userInfo`,
-    users: `${APIV1}/users`,
+    // users: `${APIV1}/users`,
     posts: `${APIV1}/posts`,
     user: `${APIV1}/user/:id`,
     dashboard: `${APIV1}/dashboard`,
